@@ -16,3 +16,5 @@ https://goo.gl/Oibq9U -> video snap of the above urbanharvester website
 - In the video you can see two types of login, donor and admin. 
 - From the donor login one can add items to be donated and search receivers based on the distance(nearby) and submit to send sms for the receivers. 
 - After the signup process as donor/receiver/transporter, admin login will be able to validate the users by validating the data from https://projects.propublica.org/nonprofits/api. Admin will be able to activate/delete the users from here.
+
+Website hosted here: http://urbanharvesterscu.herokuapp.com/
