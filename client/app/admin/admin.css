@@ -16,3 +16,6 @@
 .listing-delete-btn button {
   margin-left: 15px;
 }
+.singleBorder{
+  border:1px solid black;
+}

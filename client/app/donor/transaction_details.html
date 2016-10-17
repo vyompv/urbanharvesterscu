@@ -1,0 +1,51 @@
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="$hide()">&times;</button>
+                <h4>Transaction Details</h4>
+            </div>
+
+            <div class="modal-body" >
+                <div class="form-group">
+                    <div><label>Transaction ID: </label>{{ data.transactionId }}</div>
+                    <div><label>Date: </label>{{ data.tranxDate }}</div>
+                    <div><label>Code: </label>{{ data.code }}</div>
+                    <div> <label>Acceptor Details </label> <br/>
+                      &nbsp; &nbsp; <label>LoginId: </label>{{ data.acceptor.receiverId.name }} <br/>
+                      &nbsp; &nbsp; <label>Food Recovery Name: </label>{{ data.acceptor.receiverId.foodRecoveryInfo.foodRecoveryContactName }} <br/>
+                      &nbsp; &nbsp; <label>Food Recovery Phone: </label>{{ data.acceptor.receiverId.foodRecoveryInfo.foodRecoveryContactPhone }} <br/>
+                      &nbsp; &nbsp; <label>Food Recovery Email: </label>{{ data.acceptor.receiverId.foodRecoveryInfo.foodRecoveryContactEmail }} <br/>
+                      &nbsp; &nbsp; <label>Email: </label>{{ data.acceptor.receiverId.email }} <br/>
+                      &nbsp; &nbsp; <label>Activation Status: </label>{{ data.acceptor.receiverId.status }} <br/>
+                      &nbsp; &nbsp; <label>Ein: </label>{{ data.acceptor.receiverId.ein }}<br/>
+                      &nbsp; &nbsp; <label>Address: </label>{{ data.acceptor.receiverId.address }}<br/>
+                    </div>
+                    <label>Donor Name: </label>{{ data.donor.contactName }}<br/>
+                    <label>Donor Phone: </label>{{ data.donor.phone }}<br/>
+                    <div>
+                        <table class="singleBorder">
+                            <thead class="singleBorder">
+                                <th class="singleBorder">Food Details</th>
+                                <th class="singleBorder">Quantity</th>
+                                <th class="singleBorder">Food Type</th>
+                            </thead>
+                            <tr class="singleBorder" ng-repeat="item in data.itemDescription">
+                             <td class="singleBorder">{{ item.detail }} </td><td class="singleBorder"> {{item.quantity}}</td><td class="singleBorder"> {{item.donorsFoodType}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div> <label>All Receivers: </label> <br/>
+                        <div ng-repeat="receiver in data.receivers">
+                            &nbsp; &nbsp; <label>Name: </label>{{ receiver.contactName }} &nbsp; &nbsp; <label>Phone: </label>{{ receiver.phone }}<br/
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-default pull-right"
+                        ng-click="$hide()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

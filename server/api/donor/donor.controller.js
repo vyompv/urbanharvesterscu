@@ -203,6 +203,19 @@ exports.storeItems=function(req, res, next){
     res.status(200).json(newTransaction);
 };
 
+exports.getTransactions=function(req, res, next){
+    var date = {from:req.body.dateRange.from,to:req.body.dateRange.to};
+    var donorId = req.user._id;
+    var filteredTransactions = {"donor.donorId":donorId,transactionDate:{$gt:moment(new Date(date.from)).format(),$lt:moment(new Date(date.to)).format()}};
+    Transaction.find(filteredTransactions).populate('donor.donorId acceptor.receiverId ')
+        .exec(function (err, docs) {
+            if (err) res.status(403);
+            else {
+                res.status(200).json(docs);
+            }
+        });
+};
+
 
 exports.authCallback = function(req, res, next) {
   res.redirect('/');

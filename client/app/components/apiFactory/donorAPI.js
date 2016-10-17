@@ -14,6 +14,7 @@
       getOneUser: getOneUser,
       deleteUser: deleteUser,
 	  getReceivers:getReceivers,
+      getTransactions:getTransactions,
       saveItems:saveItems
     }
 
@@ -42,6 +43,16 @@
         cache: true
       });
     }
+
+    function getTransactions(dateRange) {
+      console.log("inside gettransactions api factory",dateRange);
+      var url = '/api/donor/getTransactions';
+      return $http.post(url, {
+        dateRange:dateRange,
+        cache: true
+      });
+    }
+
     function saveItems(items) {
       console.log("inside saveitems api factory",items);
       var url = '/api/donor/saveItems';

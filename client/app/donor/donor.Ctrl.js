@@ -3,9 +3,11 @@
 
   angular
     .module('app')
-    .controller('DonorCtrl', DonorCtrl);
+    .controller('DonorCtrl', DonorCtrl)
+    .controller('ReportsCtrl', ReportsCtrl);
 
   DonorCtrl.$inject = ['$scope', 'Auth', '$modal', 'donorAPI', '$alert'];
+  ReportsCtrl.$inject = ['$scope', 'Auth', '$modal', 'donorAPI', '$alert'];
 
   function DonorCtrl($scope, Auth, $modal, donorAPI, $alert) {
 
@@ -84,6 +86,7 @@
                   console.log("after sending sms",data);
                   $scope.lists = [];
                   $scope.item={};
+                  $scope.itemsPerPage=10;
                   $scope.closestReceivers=[];
                   $scope.receiversFilters = {};
                   $scope.transaction = {};
@@ -130,4 +133,40 @@
 		
 	}
   }
+
+    function ReportsCtrl($scope, Auth, $modal, donorAPI) {
+        $scope.options = [
+            {name: '10',value: '10'},
+            {name: '20',value: '20'},
+            {name: '50',value: '50'},
+            {name: '100',value: '100'},
+            {name: '200',value: '200'}
+        ];
+        $scope.itemsPerPage = $scope.options[0];
+        var fromDate = moment().subtract(3, 'months').format('YYYY-MM-DD');
+        $scope.data={};
+        $scope.to= new Date();
+        $scope.from = new Date(fromDate);
+        $scope.getReports=function(){
+            var fromDate = $scope.from.toISOString().slice(0,10);
+            var toDate = $scope.to.toISOString().slice(0,10)
+            console.log($scope.to.toISOString().slice(0,10)," ",$scope.from.toISOString().slice(0,10));
+            console.log($scope);
+            var dateRange={from: fromDate, to: toDate};
+            donorAPI.getTransactions(dateRange)
+                .then(function(data) {
+                    console.log("frontend",data);
+                    $scope.transactions=data.data;
+                    // console.log("frontend",$scope.closestReceivers);
+                    //alertProgress.show();
+                });
+        }
+        $scope.showDetails=function(data){ console.log("ere->",data);
+            $scope.data = data;
+            $scope.data.tranxDate=moment(data.transactionDate).format('LLL');
+        }
+        console.log($scope);
+
+    }
+
 })();

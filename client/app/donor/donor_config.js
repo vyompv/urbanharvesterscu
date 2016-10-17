@@ -14,7 +14,13 @@
         templateUrl: 'app/donor/donor.html',
         controller: 'DonorCtrl',
         authenticate: true
-      });
+      })
+      .state('reports', {
+            url: '/donor/reports',
+            templateUrl: 'app/donor/reports.html',
+            controller: 'ReportsCtrl',
+            authenticate: true
+        });
   }
 
 })();
