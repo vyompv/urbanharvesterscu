@@ -1,0 +1,71 @@
+<!-- <div ng-include="'app/components/navbar/navbar.html'"></div>
+ -->
+
+<div class="container">
+    <input type="date"  ng-model="from" >
+    <input type="date" ng-model="to"> <br/>
+    <label>Items Per Page: </label>
+    <select ng-model="itemsPerPage"
+        ng-options="option.name for option in options">
+    </select>
+    <button class="btn btn-sm btn-success" ng-click="getReports()">Get Reports</button>
+    <div class="row">
+        <div class="col-md-12">
+            <table st-safe-src="transactions" st-table="displayCollection" class="table table-striped">
+                <thead>
+                <tr>
+                    <th st-sort="acceptor.receiverId.name">Receiver Name</th>
+                    <th st-sort="acceptor.receiverId.email">Receiver Email</th>
+                    <th st-sort="transactionDate">Transaction Date</th>
+                    <th st-sort="donor.phone">Donor Contact Phone</th>
+                    <th st-sort="donationStatus">Donation Status</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>
+                        <input st-search="acceptor.receiverId.name" placeholder="search by Receiver Name" class="input-sm form-control" type="search"/>
+                    </th>
+                    <th>
+                        <input st-search="acceptor.receiverId.email" placeholder="search by Receiver email" class="input-sm form-control" type="search"/>
+                    </th>
+                    <th>
+                        <input st-search="transactionDate" placeholder="search by date" class="input-sm form-control" type="search"/>
+                    </th>
+                    <th>
+                        <input st-search="donor.phone" placeholder="search by donor contact phone" class="input-sm form-control" type="search"/>
+                    </th>
+                    <th>
+                        <select st-search="donationStatus">
+                            <option value="">All</option>
+                            <option ng-repeat="row in transactions | unique:'donationStatus'" value="{{row.donationStatus}}">{{row.donationStatus}}</option>
+                        </select>
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in displayCollection">
+                    <td>{{row.acceptor.receiverId.name | uppercase}}</td>
+                    <td>{{row.acceptor.receiverId.email | lowercase}}</td>
+                    <td>{{row.transactionDate}}</td>
+                    <td>{{row.donor.phone}}</td>
+                    <td>{{row.donationStatus | lowercase}}</td>
+                    <td><button class="btn btn-success"
+                            ng-click="showDetails(row)"
+                            data-template-url="app/donor/transaction_details.html"
+                            data-animation="am-fade-and-scale"
+                            bs-modal="showModal">Details
+                    </button></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsPerPage.value" st-displayed-pages="7"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
